@@ -12,25 +12,28 @@ public class Main {
          вместо этого, необходимо повторно запросить у пользователя ввод данных.
          */
 
-        System.out.println(">> " + askFloat());
+        System.out.println(">> " + getFloat());
 
     }
 
-    private static float askFloat() {
+    private static float getFloat() {
         boolean askUser = true;
         float number = 0;
+        Scanner scanner = new Scanner(System.in).useLocale(Locale.US);
         while (askUser) {
             System.out.print("Enter the float number > ");
-            try {
-                Scanner scanner = new Scanner(System.in).useLocale(Locale.US);
+            String getFromUser = scanner.nextLine().replace('.',',');
 
-                if (!scanner.hasNextFloat()) {
+            try {
+                Scanner scanner1 = new Scanner(getFromUser);
+
+                if (!scanner1.hasNextFloat()) {
                     throw new IllegalArgumentException("Incorrect Input");
                 }
 
-                number = scanner.nextFloat();
+                number = scanner1.nextFloat();
                 askUser = false;
-                scanner.close();
+                scanner1.close();
 
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
@@ -38,6 +41,7 @@ public class Main {
                 System.out.println("Unknown error");
             }
         }
+        scanner.close();
         return number;
     }
 }
