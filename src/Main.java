@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -30,7 +31,7 @@ public class Main {
         try {
 
             if (intArray == null) {
-                throw new IndexOutOfBoundsException("Array is null");
+                throw new NullPointerException("Array is null");
             }
 
             int d = 0;
@@ -40,10 +41,35 @@ public class Main {
             } else {
                 throw new IndexOutOfBoundsException("Array Index is Out Of Bounds");
             }
-        } catch (IndexOutOfBoundsException | ArithmeticException e) {
+        } catch (NullPointerException | IndexOutOfBoundsException | ArithmeticException e) {
             System.out.println("Catching exception: " + e.getMessage());
         } catch (Exception e) {
             System.out.println("Unknown error");
+        }
+
+
+
+        /*
+        HW2. Task3
+         */
+
+        System.out.println("\nTask 3");
+
+        try {
+            int a = 90;
+            int b = 3;
+            if (b == 0) {
+                System.out.println("dividing by zero is invalid");
+            } else {
+                System.out.println(a / b);
+            }
+            printSum(23, 234);
+            int[] abc = {1, 2};
+            abc[3] = 9;
+        } catch (IndexOutOfBoundsException ex) {
+            System.out.println("Массив выходит за пределы своего размера!");
+        } catch (Throwable ex) {
+            System.out.println("Что-то пошло не так...");
         }
 
 
@@ -77,4 +103,17 @@ public class Main {
         scanner.close();
         return number;
     }
+
+
+    public static void printSum(Integer a, Integer b) {
+        try {
+            if (a==null || b==null) {
+                throw new NullPointerException("Указатель не может указывать на null!");
+            }
+            System.out.println(a + b);
+        } catch (NullPointerException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
 }
