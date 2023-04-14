@@ -1,4 +1,4 @@
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -73,6 +73,42 @@ public class Main {
         }
 
 
+
+        /*
+        HW2. Task4
+         */
+
+        System.out.println("\nTask 4");
+
+        try {
+            String[] strings = {"apple", "orange"};
+            String strings1 = strings[2];
+            test();
+            int a = 1 / 0;
+            InputStream inputStream = new FileInputStream("/broken_reference");
+        } catch (NullPointerException | IndexOutOfBoundsException e) {
+            e.printStackTrace();
+            System.out.println("Invalid ask to array");
+        }catch (FileNotFoundException e) {
+            e.printStackTrace();
+            System.out.println("File not found");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Invalid operation with file");
+        } catch (ArithmeticException e) {
+            e.printStackTrace();
+            System.out.println("На ноль делить нельзя");
+        } catch (StackOverflowError error) {
+            System.out.println("Что-то сломалось");
+        } catch (Throwable e) {
+            e.printStackTrace();
+        } finally {
+            assert System.out != null;
+            System.out.println("Я все равно выполнился");
+        }
+        System.out.println("Я жив!");
+
+
     }
 
     private static float getFloat() {
@@ -107,13 +143,22 @@ public class Main {
 
     public static void printSum(Integer a, Integer b) {
         try {
-            if (a==null || b==null) {
+            if (a == null || b == null) {
                 throw new NullPointerException("Указатель не может указывать на null!");
             }
             System.out.println(a + b);
         } catch (NullPointerException ex) {
             System.out.println(ex.getMessage());
         }
+    }
+
+
+    private static void test() throws IOException {
+        File file = new File("1");
+        file.createNewFile();
+        FileReader reader = new FileReader(file);
+        reader.read();
+        test();
     }
 
 }
