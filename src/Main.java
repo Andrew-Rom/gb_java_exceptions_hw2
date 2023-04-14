@@ -89,9 +89,6 @@ public class Main {
         } catch (NullPointerException | IndexOutOfBoundsException e) {
             e.printStackTrace();
             System.out.println("Invalid ask to array");
-        }catch (FileNotFoundException e) {
-            e.printStackTrace();
-            System.out.println("File not found");
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Invalid operation with file");
