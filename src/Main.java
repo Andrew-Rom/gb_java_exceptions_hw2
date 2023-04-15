@@ -59,13 +59,14 @@ public class Main {
             int a = 90;
             int b = 3;
             if (b == 0) {
-                System.out.println("dividing by zero is invalid");
-            } else {
-                System.out.println(a / b);
+                throw new ArithmeticException("dividing by zero is invalid");
             }
+            System.out.println(a / b);
             printSum(23, 234);
             int[] abc = {1, 2};
             abc[3] = 9;
+        } catch (ArithmeticException ex) {
+            System.out.println(ex.getMessage());
         } catch (IndexOutOfBoundsException ex) {
             System.out.println("Массив выходит за пределы своего размера!");
         } catch (Throwable ex) {
@@ -80,27 +81,23 @@ public class Main {
 
         System.out.println("\nTask 4");
 
+        InputStream inputStream;
         try {
             String[] strings = {"apple", "orange"};
             String strings1 = strings[2];
             test();
             int a = 1 / 0;
-            InputStream inputStream = new FileInputStream("/broken_reference");
+            inputStream = new FileInputStream("/broken_reference");
         } catch (NullPointerException | IndexOutOfBoundsException e) {
-            e.printStackTrace();
             System.out.println("Invalid ask to array");
         } catch (IOException e) {
-            e.printStackTrace();
             System.out.println("Invalid operation with file");
         } catch (ArithmeticException e) {
             e.printStackTrace();
             System.out.println("На ноль делить нельзя");
-        } catch (StackOverflowError error) {
-            System.out.println("Что-то сломалось");
         } catch (Throwable e) {
             e.printStackTrace();
         } finally {
-            assert System.out != null;
             System.out.println("Я все равно выполнился");
         }
         System.out.println("Я жив!");
@@ -150,12 +147,23 @@ public class Main {
     }
 
 
-    private static void test() throws IOException {
+    private static void test() {
         File file = new File("1");
-        file.createNewFile();
-        FileReader reader = new FileReader(file);
-        reader.read();
-        test();
+        FileReader reader = null;
+        try {
+            file.createNewFile();
+            reader = new FileReader(file);
+        } catch (RuntimeException | IOException exception) {
+            System.out.println("Invalid operation with file" + exception.getClass().getSimpleName());
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    System.out.println("Exception while close");
+                }
+            }
+        }
     }
 
 }
