@@ -81,7 +81,7 @@ public class Main {
 
         System.out.println("\nTask 4");
 
-        InputStream inputStream;
+        InputStream inputStream = null;
         try {
             String[] strings = {"apple", "orange"};
             String strings1 = strings[2];
@@ -99,6 +99,13 @@ public class Main {
             e.printStackTrace();
         } finally {
             System.out.println("Я все равно выполнился");
+            if (inputStream != null) {
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    System.out.println("Exception while close");
+                }
+            }
         }
         System.out.println("Я жив!");
 
@@ -154,7 +161,7 @@ public class Main {
             file.createNewFile();
             reader = new FileReader(file);
         } catch (RuntimeException | IOException exception) {
-            System.out.println("Invalid operation with file" + exception.getClass().getSimpleName());
+            System.out.println("Invalid operation with file");
         } finally {
             if (reader != null) {
                 try {
