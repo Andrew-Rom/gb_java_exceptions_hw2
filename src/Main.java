@@ -24,7 +24,7 @@ public class Main {
         System.out.println("\nTask 2");
 
         int[] intArray = null; // Return "Catching exception: "Array is null"
-//        int[] intArray = {0,1,2,3,4,5,6,7}; // Return "Catching exception: "Array Index is Out Of Bounds"
+//        int[] intArray = {0, 1, 2, 3, 4, 5, 6, 7}; // Return "Catching exception: "Array Index is Out Of Bounds"
 //        int[] intArray = {0, 1, 2, 3, 4, 5, 6, 7, 8}; // Return "Catching exception: / by zero"
 
 
@@ -108,8 +108,7 @@ public class Main {
             }
         }
         System.out.println("Я жив!");
-
-
+        
     }
 
     private static float getFloat() {
